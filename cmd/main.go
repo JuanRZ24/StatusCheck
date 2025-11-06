@@ -8,6 +8,8 @@ import(
 	"status/internal/models"
 	"status/internal/handlers"
 	"status/internal/repository"
+	"status/internal/services"
+	"time"
 )
 
 
@@ -22,6 +24,15 @@ func main(){
 	AdminHandler := handlers.AdminHandler{
 		Repo : &repo,
 	}
+	monitor := services.MonitorService{Repo: &repo}
+
+// 🛰️ Ejecutar el monitor en segundo plano cada 60 segundos
+		go func() {
+			for {
+				monitor.CheckAllServices()
+				time.Sleep(1 * time.Minute)
+			}
+		}()
 
 	http.HandleFunc("/admin/services", AdminHandler.ServicesHandler)
 

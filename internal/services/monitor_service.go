@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"status/internal/models"
 	"status/internal/repository"
 )
 
@@ -30,7 +29,7 @@ func (m *MonitorService) CheckAllServices(){
 			continue
 		}
 
-
+		
 
 		start := time.Now()
 		resp, err  := http.Get(s.URL)

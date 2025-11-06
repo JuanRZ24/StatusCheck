@@ -8,6 +8,7 @@ type Service struct {
 	URL               string `json:"url"`
 	Method            string `json:"method" gorm:"default:GET"`
 	ExpectedStatus    int    `json:"expected_status" gorm:"default:200"`
+	Type 			  string `gorm:"type:varchar(20)" json:"type"` // "web", "api", "n8n"
 	ExpectedSubstring string `json:"expected_substring"`
 	TimeoutMS         int    `json:"timeout_ms" gorm:"default:5000"`
 	IntervalSec       int    `json:"interval_sec" gorm:"default:120"`
